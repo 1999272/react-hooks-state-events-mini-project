@@ -22,7 +22,7 @@ function NewTaskForm({ categories, onTaskFormSubmit }) {
 
   return (
     <form className="new-task-form" onSubmit={handleSubmit}>
-      <label htmlFor="new-task-text">New Task:</label>
+      <label htmlFor="new-task-text">Text:</label>
       <input
         id="new-task-text"
         type="text"
