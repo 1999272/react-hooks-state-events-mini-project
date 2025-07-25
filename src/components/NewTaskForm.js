@@ -15,7 +15,7 @@ function NewTaskForm({ categories, onTaskFormSubmit }) {
   return (
     <form className="new-task-form" onSubmit={handleSubmit}>
       <label>
-        New Task:
+        Task:
         <input
           type="text"
           value={text}
