@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import TaskList from "./TaskList";
 import CategoryFilter from "./CategoryFilter";
 import NewTaskForm from "./NewTaskForm";
-import { CATEGORIES, TASKS } from "../data";  // data in src/data.js
+import { CATEGORIES, TASKS } from "../data";
 
 function App() {
   const [tasks, setTasks] = useState(TASKS);

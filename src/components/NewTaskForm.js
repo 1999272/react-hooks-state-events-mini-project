@@ -5,37 +5,43 @@ function NewTaskForm({ categories, onTaskFormSubmit }) {
   const [text, setText] = useState("");
   const [category, setCategory] = useState(initialCategory);
 
+  function handleTextChange(e) {
+    setText(e.target.value);
+  }
+
+  function handleCategoryChange(e) {
+    setCategory(e.target.value);
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
     onTaskFormSubmit({ text, category });
     setText("");
-    setCategory(initialCategory);
+    // do not reset category to preserve user choice
   }
 
   return (
     <form className="new-task-form" onSubmit={handleSubmit}>
-      <label>
-        Task:
-        <input
-          type="text"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Category:
-        <select
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-        >
-          {categories
-            .filter((c) => c !== "All")
-            .map((c) => (
-              <option key={c} value={c}>{c}</option>
-            ))}
-        </select>
-      </label>
+      <label htmlFor="new-task-text">New Task:</label>
+      <input
+        id="new-task-text"
+        type="text"
+        value={text}
+        onChange={handleTextChange}
+        required
+      />
+      <label htmlFor="new-task-category">Category:</label>
+      <select
+        id="new-task-category"
+        value={category}
+        onChange={handleCategoryChange}
+      >
+        {categories
+          .filter((c) => c !== "All")
+          .map((c) => (
+            <option key={c} value={c}>{c}</option>
+          ))}
+      </select>
       <button type="submit">Add Task</button>
     </form>
   );
