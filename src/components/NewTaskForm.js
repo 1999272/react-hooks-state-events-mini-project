@@ -1,48 +1,43 @@
 import React, { useState } from "react";
 
 function NewTaskForm({ categories, onTaskFormSubmit }) {
-  const initialCategory = categories.find((c) => c !== "All");
   const [text, setText] = useState("");
-  const [category, setCategory] = useState(initialCategory);
-
-  function handleTextChange(e) {
-    setText(e.target.value);
-  }
-
-  function handleCategoryChange(e) {
-    setCategory(e.target.value);
-  }
+  const [category, setCategory] = useState("Code");
 
   function handleSubmit(e) {
     e.preventDefault();
-    onTaskFormSubmit({ text, category });
+    const newTask = { text, category };
+    onTaskFormSubmit(newTask);
     setText("");
-    // do not reset category to preserve user choice
+    setCategory("Code");
   }
 
   return (
     <form className="new-task-form" onSubmit={handleSubmit}>
-      <label htmlFor="new-task-text">Text:</label>
-      <input
-        id="new-task-text"
-        type="text"
-        value={text}
-        onChange={handleTextChange}
-        required
-      />
-      <label htmlFor="new-task-category">Category:</label>
-      <select
-        id="new-task-category"
-        value={category}
-        onChange={handleCategoryChange}
-      >
-        {categories
-          .filter((c) => c !== "All")
-          .map((c) => (
-            <option key={c} value={c}>{c}</option>
-          ))}
-      </select>
-      <button type="submit">Add Task</button>
+      <label>
+        Details
+        <input
+          type="text"
+          value={text}
+          onChange={e => setText(e.target.value)}
+        />
+      </label>
+      <label>
+        Category
+        <select
+          value={category}
+          onChange={e => setCategory(e.target.value)}
+        >
+          {categories
+            .filter(cat => cat !== "All")
+            .map(cat => (
+              <option key={cat} value={cat}>
+                {cat}
+              </option>
+            ))}
+        </select>
+      </label>
+      <input type="submit" value="Add task" />
     </form>
   );
 }
